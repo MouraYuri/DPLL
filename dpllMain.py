@@ -28,12 +28,16 @@ def generateFormula(data):
     return clauses
 
 def dpll(clauses):
-    
+    print('=========clauses==========\n')
+    [print("{}\n".format(x)) for x in clauses]
+    print('===================')
+
+        
 
 
 
 data = (open('in', 'r')).readlines()
 
 clauses = generateFormula(data)
-print(clauses)
+dpll(clauses)
 print('finished')
