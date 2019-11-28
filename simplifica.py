@@ -9,6 +9,10 @@ def pega_unitaria(clausulas):
         if len(x) == 1: return x[0]
 
 def atualiza(clausulas, literal_unitario):
+    clausulas = [clausula for clausula in clausulas if (literal_unitario not in clausula)] #cria uma nova lista onde os elementos não tem o literal_unitario
+    for c in range(len(clausulas)):
+        if (literal_unitario*-1 in clausulas[c]) : clausulas[c].remove(literal_unitario*-1)
+    return clausulas
 
 
 def simplifica(clausulas):
@@ -16,14 +20,10 @@ def simplifica(clausulas):
     while(tem_unitaria(clausulas)):
         literal_unitario = pega_unitaria(clausulas)
         if literal_unitario <0:
-            valoracao[literal_unitario] = True
+            valoracao[literal_unitario*-1] = False
         else:
-            valoracao[literal_unitario] = False
-        clausulas
+            valoracao[literal_unitario] = True
+        clausulas = atualiza(clausulas, literal_unitario)
+    return [clausulas, valoracao]
 
-clausulas = [[1, -3], [2, 3, -1], [-1]]
-
-print(tem_unitaria(clausulas))
-
-simplifica(clausulas)
 

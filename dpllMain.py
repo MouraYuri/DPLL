@@ -1,4 +1,4 @@
-
+from simplifica import simplifica
 def generateFormula(data):
     atoms, clauses = [], []
     data = [x.split() for x in data]
@@ -41,17 +41,27 @@ def generateFormula(data):
                 clauses.append(clause)  #o de cima é para construção da fórmula
     return clauses
 
-def dpll(clauses):
-    print('=========clauses==========\n')
-    [print("{}\n".format(x)) for x in clauses]
-    print('===================')
+def pega_literal(clausulas):
+    return clausulas[0][0]
 
-        
+
+def dpll(clausulas, valoracao):
+    clausulas, valoracao2 = simplifica(clausulas)
+    valoracao.update(valoracao2) #concatena 2 dicionários
+    if (len([clausula for clausula in clausulas if (len(clausula)==0)])>0) : return False #se existir uma clausula vazia
+    if (len(clausulas)==0) : return valoracao
+    literal = pega_literal(clausulas)
+    clausulas1, clausulas2 = clausulas + [[literal]], clausulas + [[-1*literal]]
+    res = dpll(clausulas1, valoracao)
+    if (res != False) : return res
+    return dpll(clausulas2, valoracao)
 
 
 
 data = (open('in', 'r')).readlines()
 
-clauses = generateFormula(data)
-dpll(clauses)
+#clauses = generateFormula(data)
+clauses = [[1, -3], [2, 3, -1]]
+
+print("Resposta Final => {}\n".format(dpll(clauses, {})))
 print('finished')
