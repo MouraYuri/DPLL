@@ -60,8 +60,8 @@ def dpll(clausulas, valoracao):
 
 data = (open('in', 'r')).readlines()
 
-#clauses = generateFormula(data)
-clauses = [[1, -3], [2, 3, -1]]
+clauses = generateFormula(data)
+#clauses = [[1, -3], [2, 3, -1]]
 
 print("Resposta Final => {}\n".format(dpll(clauses, {})))
 print('finished')
