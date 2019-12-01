@@ -58,8 +58,8 @@ def dpll(clausulas, valoracao):
 
 
 
-data = (open('./CursosEmUmEvento/outTresHoras.txt', 'r')).readlines()
-
+#data = (open('./CursosEmUmEvento/outTresHoras.txt', 'r')).readlines()
+data = (open('./CursosEmUmEvento/outCincoHoras.txt', 'r')).readlines()
 clauses = generateFormula(data)
 #clauses = [[1, -3], [2, 3, -1]]
 
