@@ -45,6 +45,7 @@ def allInFiveHours(data):
     outFile = open('outCincoHoras.txt', 'w')
     outFile.write("c comentario\np cnf {} {}\n".format(len(atomsGroup)*5, len(restrictions)))
     [outFile.write("{} {} 0\n".format(x[0],x[1])) for x in restrictions[:-len(atomsGroup)]]
+    #[outFile.write("{} {}\n".format(x[0],x[1])) for x in restrictions[:-len(atomsGroup)]] #para testar no SAT SOLVER DA UFPR
     [outFile.write("{} {} {} 0\n".format(x[0], x[1], x[2])) for x in restrictions[-len(atomsGroup):]]
     outFile.close()
 

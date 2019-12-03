@@ -1,4 +1,15 @@
 from simplifica import simplifica
+
+def escreveASaida(data):
+    outFile = open('outDPLL.txt', 'w')
+    if (data != False):
+        for x in data:
+            if data[x] == True : outFile.write("{} ".format(x))
+            else : outFile.write("-{} ".format(x))
+    else: outFile.write("UNSATISFIABLE")
+    outFile.close()
+
+
 def generateFormula(data):
     atoms, clauses = [], []
     data = [x.split() for x in data]
@@ -44,12 +55,11 @@ def generateFormula(data):
 def pega_literal(clausulas):
     return clausulas[0][0]
 
-
 def dpll(clausulas, valoracao):
     clausulas, valoracao2 = simplifica(clausulas)
     valoracao.update(valoracao2) #concatena 2 dicionários
     if (len([clausula for clausula in clausulas if (len(clausula)==0)])>0) : return False #se existir uma clausula vazia
-    if (len(clausulas)==0) : return valoracao
+    if (len(clausulas)==0) : return valoracao #Se não existir nenhuma clausula no conjunto de clausulas
     literal = pega_literal(clausulas)
     clausulas1, clausulas2 = clausulas + [[literal]], clausulas + [[-1*literal]]
     res = dpll(clausulas1, valoracao)
@@ -57,11 +67,16 @@ def dpll(clausulas, valoracao):
     return dpll(clausulas2, valoracao)
 
 
-
 #data = (open('./CursosEmUmEvento/outTresHoras.txt', 'r')).readlines()
 data = (open('./CursosEmUmEvento/outCincoHoras.txt', 'r')).readlines()
+#data = (open('in', 'r')).readlines()
 clauses = generateFormula(data)
 #clauses = [[1, -3], [2, 3, -1]]
 
-print("Resposta Final => {}\n".format(dpll(clauses, {})))
+result = dpll(clauses, {})
+
+print("Resposta Final => {}\n".format(result))
+
+escreveASaida(result)
+
 print('finished')

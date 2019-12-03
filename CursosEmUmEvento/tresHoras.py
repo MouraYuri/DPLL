@@ -31,7 +31,8 @@ def allInThreeHours(data):
 
     [restrictions.append(x) for x in atomsGroup]
 
-    print(restrictions)
+    print("restrictions => {}\n".format(restrictions))
+    print("restrictions[:-len(atomsGroup)] => {}\n".format(restrictions[:-len(atomsGroup)]))
 
     #escrevendo a saída
     outFile = open('outTresHoras.txt', 'w')
