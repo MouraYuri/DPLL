@@ -42,14 +42,14 @@ def allInFiveHours(data):
     print("Restrições => {}\n".format(restrictions))
 
     #escrevendo a saída
-    outFile = open('outCincoHoras.txt', 'w')
+    outFile = open('./CursosEmUmEvento/outCincoHoras.txt', 'w')
     outFile.write("c comentario\np cnf {} {}\n".format(len(atomsGroup)*5, len(restrictions)))
     [outFile.write("{} {} 0\n".format(x[0],x[1])) for x in restrictions[:-len(atomsGroup)]]
     #[outFile.write("{} {}\n".format(x[0],x[1])) for x in restrictions[:-len(atomsGroup)]] #para testar no SAT SOLVER DA UFPR
     [outFile.write("{} {} {} 0\n".format(x[0], x[1], x[2])) for x in restrictions[-len(atomsGroup):]]
     outFile.close()
 
-allInFiveHours(open('inTresHoras', 'r').readlines())
+allInFiveHours(open('./CursosEmUmEvento/inTresHoras', 'r').readlines())
 
 
 #Resposta Final => {21: False, 22: False, 23: True, 13: False, 33: False, 43: False, 41: False, 42: True, 32: False, 31: True, 11: False, 12: True}
